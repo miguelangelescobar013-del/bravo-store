@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import testRoutes from './routes/test.routes';
 import categoryRoutes from './routes/category.routes';
+import productRoutes from './routes/product.routes';
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.get('/', (_req, res) => {
 
 app.use('/api', testRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/products', productRoutes);
 
 export default app;
