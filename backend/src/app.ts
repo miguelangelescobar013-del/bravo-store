@@ -6,6 +6,7 @@ import testRoutes from './routes/test.routes';
 import categoryRoutes from './routes/category.routes';
 import productRoutes from './routes/product.routes';
 import userRoutes from './routes/user.routes';
+import favoriteRoutes from './routes/favorite.routes';
 
 const app = express();
 
@@ -25,5 +26,6 @@ app.use('/api', testRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/favorites', favoriteRoutes);
 
 export default app;
