@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import testRoutes from './routes/test.routes';
 import categoryRoutes from './routes/category.routes';
 import productRoutes from './routes/product.routes';
+import userRoutes from './routes/user.routes';
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.get('/', (_req, res) => {
 app.use('/api', testRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
 
 export default app;
