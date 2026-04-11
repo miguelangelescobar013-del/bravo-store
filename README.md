@@ -40,36 +40,50 @@ Este proyecto implementa una API REST con Node.js, Express, TypeScript y SQL Ser
 ```bash
 git clone https://github.com/TU_USUARIO/bravo-store.git
 cd bravo-store/backend
+```
+
 
 2. Instalar dependencias
 ```bash
 npm install
+```
 
 3. Variables de entorno
 
 Crear archivo .env basado en .env.example
 
+
+```bash
 PORT=3000
 DB_SERVER=localhost
 DB_DATABASE=BravoStoreBD
 JWT_SECRET=bravo_store_secret
+```
 
 4. Configurar base de datos
 
  1. Crear base de datos:
 ```sql
 CREATE DATABASE BravoStoreBD;
+```
 
  2. Ejecutar scripts:
+ ```sql
 - database/schema.sql
 - database/seed.sql
+ ```
 
-```text
+
 5. Ejecutar servidor
+```bash
 npm run dev
+```
+
 
 🌐 Base URL API
+```bash
 http://localhost:3000/api
+```
 
 📡 Endpoints
 
