@@ -81,7 +81,7 @@ npm run dev
 
 🌐 Base URL API
 ```bash
-http://localhost:3000/api
+http://localhost:3000/api-docs
 ```
 
 📡 Endpoints
