@@ -62,12 +62,12 @@ JWT_SECRET=bravo_store_secret
 
 4. Configurar base de datos
 
- 1. Crear base de datos:
+1. Crear base de datos:
 ```sql
 CREATE DATABASE BravoStoreBD;
 ```
 
- 2. Ejecutar scripts:
+2. Ejecutar scripts:
  ```sql
 - database/schema.sql
 - database/seed.sql
@@ -82,7 +82,7 @@ npm run dev
 
 🌐 Base URL API
 ```bash
-http://localhost:3000/api
+http://localhost:3000/api-docs
 ```
 
 📡 Endpoints
