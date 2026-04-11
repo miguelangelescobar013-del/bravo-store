@@ -2,6 +2,14 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import testRoutes from './routes/test.routes';
+import categoryRoutes from './routes/category.routes';
+import productRoutes from './routes/product.routes';
+import userRoutes from './routes/user.routes';
+import favoriteRoutes from './routes/favorite.routes';
+import reviewRoutes from './routes/review.routes';
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './config/swagger';
 
 const app = express();
 
@@ -16,5 +24,13 @@ app.get('/', (_req, res) => {
     message: 'API de Bravo Store funcionando correctamente'
   });
 });
+
+app.use('/api', testRoutes);
+app.use('/api/categories', categoryRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/favorites', favoriteRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 export default app;
