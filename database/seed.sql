@@ -20,3 +20,33 @@ VALUES
 ('Jogger Gris', 'Pantalón jogger cómodo', 110000, 15, 2),
 ('Gorra Classic', 'Gorra ajustable unisex', 45000, 30, 3);
 GO
+
+INSERT INTO Pedidos (id_usuario, fecha, estado, total)
+VALUES
+(1, GETDATE(), '1', 85000),
+(2, GETDATE(), '1', 110000);
+GO
+
+INSERT INTO Pedido_Detalle (id_pedido, id_producto, cantidad, precio_unitario)
+VALUES
+(1, 1, 1, 85000),
+(2, 2, 1, 110000);
+GO
+
+INSERT INTO Favoritos (id_usuario, id_producto)
+VALUES
+(1, 2),
+(1, 3),
+(2, 1);
+GO
+
+INSERT INTO Pagos (id_pedido, metodo_pago, estado_pago)
+VALUES
+(1, '1', '2'),
+(2, '2', '1');
+GO
+
+INSERT INTO Resenas (id_usuario, id_pedido, id_producto, calificacion, comentario, fecha)
+VALUES
+(1, 1, 1, 5, 'Muy buen producto, excelente calidad', GETDATE());
+GO

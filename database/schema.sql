@@ -1,3 +1,4 @@
+CREATE DATABASE BravoStoreBD;
 USE BravoStoreBD;
 GO
 
