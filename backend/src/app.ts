@@ -10,6 +10,8 @@ import favoriteRoutes from './routes/favorite.routes';
 import reviewRoutes from './routes/review.routes';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './config/swagger';
+import orderRoutes from './routes/order.routes';
+import paymentRoutes from './routes/payment.routes';
 
 const app = express();
 
@@ -32,5 +34,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/favorites', favoriteRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api/orders', orderRoutes);
+app.use('/api/payments', paymentRoutes);
 
 export default app;
