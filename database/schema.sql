@@ -72,8 +72,10 @@ GO
 CREATE TABLE Pagos (
     id_pago INT PRIMARY KEY IDENTITY(1,1),
     id_pedido INT,
-    metodo_pago VARCHAR(20) NOT NULL CHECK (metodo_pago IN ('1','2','3','4')),
-    estado_pago VARCHAR(20) NOT NULL CHECK (estado_pago IN ('1','2','3')),
+    metodo_pago VARCHAR(20) NOT NULL
+    CHECK (metodo_pago IN ('Credito','PSE','Debito','Paypal')),
+    estado_pago VARCHAR(20) NOT NULL
+    CHECK (estado_pago IN ('Pendiente','Aprobado','Rechazado')),
     FOREIGN KEY (id_pedido) REFERENCES Pedidos(id_pedido)
 );
 GO
