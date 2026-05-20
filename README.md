@@ -101,6 +101,15 @@ http://localhost:3000/api
 - POST /reviews
 - DELETE /reviews/:id
 
+🧾 Pedidos
+- POST /api/orders
+- GET /api/orders/:id
+- GET /api/orders/user/:userId
+
+💳 Pagos
+- POST /api/payments/simulate
+- GET /api/payments/order/:orderId
+
 🧠 Características implementadas
 - CRUD completo de categorías
 - CRUD completo de productos
