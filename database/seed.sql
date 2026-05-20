@@ -42,8 +42,8 @@ GO
 
 INSERT INTO Pagos (id_pedido, metodo_pago, estado_pago)
 VALUES
-(1, '1', '2'),
-(2, '2', '1');
+(1, 'PSE', 'Aprobado'),
+(2, 'Credito', 'Pendiente');
 GO
 
 INSERT INTO Resenas (id_usuario, id_pedido, id_producto, calificacion, comentario, fecha)
