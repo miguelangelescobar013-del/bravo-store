@@ -8,17 +8,22 @@ import {
   Alert,
 } from 'react-native';
 
-import { Product } from '../types/product';
+import { CartItem } from '../types/product';
 import { api } from '../services/api';
 
 type Props = {
-  cart: Product[];
+  cart: CartItem[];
   onClearCart: () => void;
+  onRemoveFromCart: (index: number) => void;
 };
 
 type PaymentMethod = 'PSE' | 'Credito' | 'Debito' | 'Paypal';
 
-export default function CartScreen({ cart, onClearCart }: Props) {
+export default function CartScreen({
+  cart,
+  onClearCart,
+  onRemoveFromCart,
+}: Props) {
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('PSE');
 
   const total = cart.reduce((sum, item) => sum + item.precio, 0);
@@ -88,17 +93,33 @@ export default function CartScreen({ cart, onClearCart }: Props) {
 
       <FlatList
         data={cart}
-        keyExtractor={(item, index) => `${item.id_producto}-${index}`}
+        keyExtractor={(item, index) => `${item.id_producto}-${item.tallaSeleccionada}-${index}`}
         ListEmptyComponent={
           <Text style={styles.empty}>Tu carrito está vacío</Text>
         }
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <View style={styles.card}>
-            <Text style={styles.name}>{item.nombre}</Text>
-            <Text style={styles.description}>{item.descripcion}</Text>
-            <Text style={styles.price}>
-              ${item.precio.toLocaleString('es-CO')}
-            </Text>
+            <View style={styles.cardHeader}>
+              <View style={styles.productInfo}>
+                <Text style={styles.name}>{item.nombre}</Text>
+                <Text style={styles.description}>{item.descripcion}</Text>
+
+                <Text style={styles.size}>
+                  Talla: {item.tallaSeleccionada}
+                </Text>
+
+                <Text style={styles.price}>
+                  ${item.precio.toLocaleString('es-CO')}
+                </Text>
+              </View>
+
+              <Pressable
+                style={styles.removeButton}
+                onPress={() => onRemoveFromCart(index)}
+              >
+                <Text style={styles.removeText}>✕</Text>
+              </Pressable>
+            </View>
           </View>
         )}
       />
@@ -114,10 +135,20 @@ export default function CartScreen({ cart, onClearCart }: Props) {
         </View>
 
         <View style={styles.summary}>
-          <Text style={styles.totalLabel}>Total</Text>
-          <Text style={styles.total}>
-            ${total.toLocaleString('es-CO')}
-          </Text>
+          <View style={styles.totalRow}>
+            <View>
+              <Text style={styles.totalLabel}>Total</Text>
+              <Text style={styles.total}>
+                ${total.toLocaleString('es-CO')}
+              </Text>
+            </View>
+
+            {cart.length > 0 && (
+              <Pressable style={styles.clearButton} onPress={onClearCart}>
+                <Text style={styles.clearText}>Vaciar</Text>
+              </Pressable>
+            )}
+          </View>
 
           <Pressable style={styles.buyButton} onPress={createOrder}>
             <Text style={styles.buyText}>Pagar ahora</Text>
@@ -161,6 +192,16 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
 
+  cardHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 12,
+  },
+
+  productInfo: {
+    flex: 1,
+  },
+
   name: {
     color: '#fff',
     fontSize: 18,
@@ -172,10 +213,30 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
 
-  price: {
+  size: {
     color: '#00ff99',
+    marginTop: 8,
+    fontWeight: 'bold',
+  },
+
+  price: {
+    color: '#fff',
     fontWeight: 'bold',
     marginTop: 8,
+  },
+
+  removeButton: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    backgroundColor: '#333',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  removeText: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
 
   checkoutBox: {
@@ -225,6 +286,12 @@ const styles = StyleSheet.create({
     paddingTop: 4,
   },
 
+  totalRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
   totalLabel: {
     color: '#aaa',
   },
@@ -234,6 +301,18 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: 'bold',
     marginBottom: 14,
+  },
+
+  clearButton: {
+    backgroundColor: '#333',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 14,
+  },
+
+  clearText: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
 
   buyButton: {

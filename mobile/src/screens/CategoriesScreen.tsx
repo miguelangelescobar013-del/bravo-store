@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
 import { api } from '../services/api';
 
 type Category = {
@@ -8,7 +8,11 @@ type Category = {
   descripcion: string;
 };
 
-export default function CategoriesScreen() {
+type Props = {
+  onSelectCategory: (categoryId: number, categoryName: string) => void;
+};
+
+export default function CategoriesScreen({ onSelectCategory }: Props) {
   const [categories, setCategories] = useState<Category[]>([]);
 
   const loadCategories = async () => {
@@ -27,15 +31,23 @@ export default function CategoriesScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Categorías</Text>
+      <Text style={styles.subtitle}>Elige una categoría para ver sus productos</Text>
 
       <FlatList
         data={categories}
         keyExtractor={(item) => item.id_categoria.toString()}
         renderItem={({ item }) => (
-          <View style={styles.card}>
-            <Text style={styles.name}>{item.nombre}</Text>
-            <Text style={styles.description}>{item.descripcion}</Text>
-          </View>
+          <Pressable
+            style={styles.card}
+            onPress={() => onSelectCategory(item.id_categoria, item.nombre)}
+          >
+            <Text style={styles.icon}>📦</Text>
+            <View style={styles.info}>
+              <Text style={styles.name}>{item.nombre}</Text>
+              <Text style={styles.description}>{item.descripcion}</Text>
+            </View>
+            <Text style={styles.arrow}>›</Text>
+          </Pressable>
         )}
       />
     </View>
@@ -49,16 +61,31 @@ const styles = StyleSheet.create({
     backgroundColor: '#111',
   },
   title: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: 'bold',
     color: '#fff',
+  },
+  subtitle: {
+    color: '#aaa',
+    marginTop: 4,
     marginBottom: 20,
   },
   card: {
-    backgroundColor: '#222',
-    padding: 16,
-    borderRadius: 12,
+    backgroundColor: '#1f1f1f',
+    padding: 18,
+    borderRadius: 18,
     marginBottom: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#2b2b2b',
+  },
+  icon: {
+    fontSize: 28,
+    marginRight: 14,
+  },
+  info: {
+    flex: 1,
   },
   name: {
     color: '#fff',
@@ -68,5 +95,10 @@ const styles = StyleSheet.create({
   description: {
     color: '#aaa',
     marginTop: 6,
+  },
+  arrow: {
+    color: '#00ff99',
+    fontSize: 34,
+    fontWeight: 'bold',
   },
 });
