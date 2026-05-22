@@ -1,138 +1,91 @@
 # 🛍️ Bravo Store
 
-Bravo Store es una aplicación de comercio digital para la venta de ropa y accesorios.  
-Este proyecto implementa una API REST con Node.js, Express, TypeScript y SQL Server, siguiendo una arquitectura cliente-servidor.
-
----
+Aplicación móvil de e-commerce desarrollada con React Native, Expo y TypeScript, conectada a una API REST y base de datos SQL Server.
 
 ## 🚀 Tecnologías utilizadas
 
+### Frontend
+- React Native
+- Expo
+- TypeScript
+
+### Backend
 - Node.js
 - Express
 - TypeScript
-- SQL Server
-- Git y GitHub
 
----
+
+### Base de Datos
+- SQL Server
 
 ## 📁 Estructura del proyecto
 
 - `backend/`: API REST
 - `database/`: scripts SQL (creación e inserción)
 - `mobile/`: app React Native
-- `docs/`: documentación
 
----
+## Características principales
+- Visualización de productos
+- Categorías Hombre y Mujer
+- Carrito de compras
+- Favoritos
+- Login simulado
+- Selección de tallas
+- Simulación de pagos
+- API REST conectada al frontend
+- Diseño responsive para móvil
 
-## ⚙️ Requisitos previos
-
-- Node.js
-- SQL Server
-- ODBC Driver 17 o 18 for SQL Server
-- Git
-
----
-
-## 🔧 Configuración del backend
-
-### 1. Clonar repositorio
+### Instalación Frontend
 
 ```bash
-git clone https://github.com/TU_USUARIO/bravo-store.git
-cd bravo-store/backend
-```
-
-2. Instalar dependencias
-```bash
+cd mobile
 npm install
+npx expo start
 ```
 
-3. Variables de entorno
-
-Crear archivo .env basado en .env.example
+### Instalación Backend
 
 ```bash
-PORT=3000
-DB_SERVER=localhost
-DB_DATABASE=BravoStoreBD
-JWT_SECRET=bravo_store_secret
-```
-
-4. Configurar base de datos
-
- 1. Crear base de datos:
-```sql
-CREATE DATABASE BravoStoreBD;
-
- 1. Crear base de datos:
-```
-
- 2. Ejecutar scripts:
-```sql
-- database/schema.sql
-- database/seed.sql
-```
-
-
-5. Ejecutar servidor
-```bash
+cd backend
+npm install
 npm run dev
 ```
 
-🌐 Base URL API
+### Servidor backend:
 ```bash
-http://localhost:3000/api-docs
+http://localhost:3000
+```
+### Base de datos
+1. Abrir SQL Server Management Studio
+2. Ejecutar primero:
+```bash
+database/schema.sql
+```
+3. Luego ejecutar:
+```bash
+database/seed.sql
 ```
 
-📡 Endpoints
+### API REST
 
-📂 Categorías
-- GET /categories
-- GET /categories/:id
-- POST /categories
-- PUT /categories/:id
-- DELETE /categories/:id
+La API utiliza arquitectura REST y responde en formato JSON.
 
-🛒 Productos
-- GET /products
-- GET /products/:id
-- GET /products?category=1
-- POST /products
-- PUT /products/:id
-- DELETE /products/:id
+Principales módulos:
 
-👤 Usuarios
-- GET /users/profile/:id
+- Productos
+- Categorías
+- Usuarios
+- Pedidos
+- Pagos
+- Favoritos
+- Reseñas
 
-⭐ Favoritos
-- GET /favorites/:userId
-- POST /favorites
-- DELETE /favorites/:id
-
-📝 Reseñas
-- GET /reviews/product/:productId
-- POST /reviews
-- DELETE /reviews/:id
-
-🧾 Pedidos
-- POST /api/orders
-- GET /api/orders/:id
-- GET /api/orders/user/:userId
-
-💳 Pagos
-- POST /api/payments/simulate
-- GET /api/payments/order/:orderId
-
-🧠 Características implementadas
-- CRUD completo de categorías
-- CRUD completo de productos
-- Perfil de usuario en solo lectura
-- Gestión de favoritos
-- Sistema de reseñas con validación de compra
-- Validaciones en backend
-- Consultas parametrizadas (seguridad)
-- Arquitectura por capas (controllers, services, routes)
-
-📌 Estado del proyecto
-
-Backend funcional con los módulos principales del sistema de comercio electrónico Bravo Store.
+### Compilación y ejecución
+Frontend
+```bash
+npx expo start
+```
+Backend
+```bash
+npm run dev
+```
