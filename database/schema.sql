@@ -1,4 +1,9 @@
-CREATE DATABASE BravoStoreBD;
+IF DB_ID('BravoStoreBD') IS NULL
+BEGIN
+    CREATE DATABASE BravoStoreBD;
+END
+GO
+
 USE BravoStoreBD;
 GO
 
@@ -25,6 +30,7 @@ CREATE TABLE Productos (
     descripcion VARCHAR(100) NOT NULL,
     precio INT NOT NULL,
     stock INT NOT NULL,
+    tallas VARCHAR(100),
     id_categoria INT,
     FOREIGN KEY (id_categoria) REFERENCES Categorias(id_categoria)
 );
@@ -72,10 +78,8 @@ GO
 CREATE TABLE Pagos (
     id_pago INT PRIMARY KEY IDENTITY(1,1),
     id_pedido INT,
-    metodo_pago VARCHAR(20) NOT NULL
-    CHECK (metodo_pago IN ('Credito','PSE','Debito','Paypal')),
-    estado_pago VARCHAR(20) NOT NULL
-    CHECK (estado_pago IN ('Pendiente','Aprobado','Rechazado')),
+    metodo_pago VARCHAR(20) NOT NULL CHECK (metodo_pago IN ('Credito','PSE','Debito','Paypal')),
+    estado_pago VARCHAR(20) NOT NULL CHECK (estado_pago IN ('Pendiente','Aprobado','Rechazado')),
     FOREIGN KEY (id_pedido) REFERENCES Pedidos(id_pedido)
 );
 GO
